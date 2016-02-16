@@ -4,14 +4,12 @@
     <article class="ride-box clearfix">
         <div class="ride-content">
             <h3><%= link_to p.title, post_path(p) %> by <%= p.user.email %></h3>
-	    <%= image_tag p.image.url %>
-	<%= link_to 'Review', new_post_review_path(p)  %>
+	    <%= image_tag p.image.url(:thumb) %>
+	    <%= link_to 'Review', new_post_review_path(p)  %>
 	    <%= link_to 'Connect', post_connect_path(p) %>
 	    <p><%= p.number_of_buyers %></p>
         </div>
-
         </ul><!-- end .ride-meta -->
-
         </div>
     </article><!-- end .ride-box -->
 </div>

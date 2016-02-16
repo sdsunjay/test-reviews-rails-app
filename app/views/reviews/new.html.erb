@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add New Review</title>
-  </head>
-  <body>
-    <%= form_for([@post, @review]) do |f| %>
-	  <%= render 'form_error', resource: f.object %>
-          <label><%= f.label :title %></label>
-          <%= f.text_field :title %>
-          <label><%= f.label :description %></label>
-          <%= f.text_field :description %>
-          <label><%= f.label :rating %></label>
-           <%= f.select :rating, options_for_select([['Very Bad', 1], ['Bad', 2], ['Okay', 3], ['Good', 4], ['Very Good', 5]]) %>
-	  <%= f.hidden_field :post_id, :value => @post.id %>       
-    	<%= f.submit "Add Review", class: "addButton" %>
-  <% end %>
-  </body>
-</html>
+    
+<h1>New Review</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', posts_path %>
