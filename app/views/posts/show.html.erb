@@ -1,0 +1,18 @@
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="page-sub-title textcenter">
+    					<h2><%= @post.title %></h2>
+					<div class="line"></div>
+				</div><!-- end .page-sub-title -->
+			</div>
+<div id="posts-show">
+    <div class="posts-show-right">
+        <h3>Post Info: </h3>
+        <ul>
+            <li><strong>Description: </strong><%= @post.description %></li>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <h4>Reviews</h4>
+   	<%= render 'partials/reviews' %>
+    </div>

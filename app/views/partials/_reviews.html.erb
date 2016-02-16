@@ -1,0 +1,24 @@
+<% if @reviews.exists? %>
+<% @reviews.each_with_index do |r, index| %>
+<div class="col-xs-12">
+    <article class="ride-box clearfix">
+        <div class="ride-content">
+            <h3><%= r.title%> by <%= r.user.email %></h3>
+            <h2><%= r.description %></h2>
+        </div>
+
+        </ul><!-- end .ride-meta -->
+
+        </div>
+    </article><!-- end .ride-box -->
+</div>
+<% end %>
+<% else %>
+<div class="col-xs-12">
+    <article class="ride-box clearfix">
+        <div class="ride-content">
+            <h3>No reviews yet</h3>
+        </div>
+    </article>
+</div>
+<% end %>

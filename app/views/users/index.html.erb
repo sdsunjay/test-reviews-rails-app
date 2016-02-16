@@ -1,0 +1,36 @@
+<!-- 'access_level' must be set to 1 or 2 to view this page -->
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-sub-title textcenter">
+<h2 class="page-header">Manage Users <%= link_to 'Create New',  new_user_registration_path, class:'btn btn-success pull-right'%></h2> 
+          <div class="line"></div>
+        </div><!-- end .page-sub-title -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      <% if @users.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <!--<th>User's Full Name</th>-->
+                  <th>Email</th>
+                  <th>Create Date </th>
+              </tr>
+              <% @users.each do |user| %>
+                <tr>
+			<% if false %>
+                            <td><%= user.first_name + ' ' + user.last_name %>
+                        <% end %>
+                    </td>
+                    <td><%= user.email %></td>
+  		    <td><%= user.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>                
+		</tr>
+            <% end %>
+            </table>
+            <% else %>
+                <p>There are no users</p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
