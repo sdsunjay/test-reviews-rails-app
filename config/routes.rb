@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index]
   resources :reviews, only: [:index, :show]
 
   authenticate :user do
      get "posts/:id/connect" => 'posts#connect', as: :post_connect
-     resources :posts, only: [:new, :create, :edit, :update, :destroy] do
+     resources :posts, only: [:new, :create, :edit, :update, :destroy, :show] do
      	resources :reviews, only: [:new, :create]
      end
      resources :users, only: [:show, :index, :edit, :destroy, :update]

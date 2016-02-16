@@ -1,6 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Paperclip config:
+   # TODO fix for production
+  # Paperclip.options[:image_magick_path] = "/usr/local/Cellar/imagemagick/6.9.3-0_2/bin"
+  # Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.9.3-0_2/bin"
   # Code is not reloaded between requests.
   config.cache_classes = true
 

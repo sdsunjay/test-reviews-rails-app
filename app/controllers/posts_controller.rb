@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :connect]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_post, except: [:index]
 
   respond_to :html, :js
 
@@ -10,11 +10,17 @@ class PostsController < ApplicationController
   end
 
   def show
-    @reviews = Review.where(post_id: @post.id).order("created_at DESC")
+    @reviews = Review.where(post_id: @post.id).order('created_at DESC')
+    #if @reviews.blank?
+     # @reviews = 0
+    #else
+    #  @avg_review = @reviews.average(:rating).round(2)
+    #end  
   end
 
   def new
-    @post = Post.new
+    #@post = current_user.posts.build  
+    @post = current_user.posts.build(post_params)
   end
 
   def edit
@@ -22,10 +28,17 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    @post.save
 
-    respond_with @post
-  end
+    #@post = Post.new(post_params)
+    @post.user_id = current_user.id
+    # Save the post
+    if @post.save
+      flash[:notice] = 'Post Created'
+      redirect_to posts_path
+    else
+      render 'new'
+    end
+  end  
 
   def update
     @post.update_attributes(params[:post])
@@ -55,13 +68,12 @@ class PostsController < ApplicationController
 
   private 
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def posts_params
-    params.require(:post).permit(:title, :description, :image)
-  end
+    def post_params
+      params.require(:post).permit(:title, :description, :image, :price)
+    end
  
-  
 end
