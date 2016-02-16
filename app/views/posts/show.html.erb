@@ -20,9 +20,14 @@
                 <td><strong>price:</strong></td>
                 <td><%= @post.price %></td>
               </tr>
+              <tr>
+                <td><strong>Number of interest requests:</strong></td>
+                <td><%= @post.number_of_buyers %></td>
+              </tr>
             </tbody>
           </table>
-          <%= link_to "Write a Review", new_post_review_path(@post) %>
+          <%= link_to "Write a Review", new_post_review_path(@post) %><br>
+          <%= link_to "Express interest", post_connect_path(@post) %>
         </div>
       </div>
       <div class="col-md-7 col-md-offset-1">
