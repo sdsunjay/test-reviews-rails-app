@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 20160216005448) do
     t.integer  "user_id"
     t.integer  "number_of_buyers",                           default: 0
     t.decimal  "price",              precision: 8, scale: 2, default: 0.0
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.integer  "status",                                     default: 0
+    t.datetime "when",                                       default: '2016-02-18 02:19:21', null: false
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
