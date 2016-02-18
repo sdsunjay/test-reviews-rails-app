@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use MySQL as the database for Active Record
+gem 'mysql2', '~> 0.3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
@@ -23,6 +23,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
 # You know, for authentication
 gem 'devise', '~> 3.5.5'
 # You know, for image uploads
