@@ -13,6 +13,10 @@
                 <td><%= @post.title %></td>
               </tr>
               <tr>
+                <td><strong>Posted By:</strong></td>
+                <td><%= @post.user.email %></td>
+              </tr>
+              <tr>
                 <td><strong>Description:</strong></td>
                 <td><%= @post.description %></td>
               </tr>
@@ -26,32 +30,50 @@
               </tr>
             </tbody>
           </table>
-          <%= link_to "Write a Review", new_post_review_path(@post) %><br>
-          <%= link_to "Express interest", post_connect_path(@post) %>
+          <% if @post.status == 'completed' %>
+	  	<%= link_to "Write a Review", new_post_review_path(@post) %><br>
+          <% end %>
+          <% if @post.status == 'open' %>
+	  	<%= link_to "Express interest", post_connect_path(@post) %>
+          <% end %>
         </div>
       </div>
       <div class="col-md-7 col-md-offset-1">
-        <h1 class="review_title"><%= @post.title %></h1>
-        <p><%= @post.description %></p>
-
-        <% if @reviews.blank? %>
+        <h1 class="review_title">Reviews</h1>
+        <% if @post.status == 'completed' %>
+          <% if @reviews.blank? %>
           <h3>No reviews just yet, would you like to add the first!</h3>
           <%= link_to "Write Review", new_post_review_path(@post), class: "btn btn-danger" %>
         <% else %>
+            <table class="table table-striped">
+                <tr>
+                  <th>Title</th>
+                  <th>Reviewer </th>
+                  <th>Reviewee </th>
+              	  <th>Edit</th>
+                  <th>Delete</th>
+	        </tr>
           <% @reviews.each do |review| %>
             <div class="reviews">
               <div class="star-rating" data-score= <%= review.rating %> ></div>
-							<p><%= review.title %></p>
-							<p><%= review.description %></p>
+		        <tr>
+			<td><%= review.title %></td>
+			<td><%= review.user.email %></td>
+			<td> <%= review.reviewee_id %></td>
+		        <td><%= link_to 'Edit', edit_post_review_path(@post,review), class: 'btn btn-primary' %></td>
+                        <td><%= link_to 'Delete', post_review_path(@post,review), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+	</tr>
             </div>
           <% end %>
         <% end %>
+      <% end %>
       </div>
     </div>
   </div>
 </div>
-
+<% if @post.user_id == current_user.id %>
 <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
 <%= link_to 'Back', posts_path %>
 
 <script>
