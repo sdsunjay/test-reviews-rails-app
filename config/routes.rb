@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   authenticate :user do
      get "posts/:id/connect" => 'posts#connect', as: :post_connect
      resources :posts, only: [:new, :create, :edit, :update, :destroy, :show] do
-     	resources :reviews, only: [:new, :create]
+     	resources :reviews, only: [:new, :create, :edit, :update, :destroy]
      end
      resources :users, only: [:show, :index, :edit, :destroy, :update]
   end
