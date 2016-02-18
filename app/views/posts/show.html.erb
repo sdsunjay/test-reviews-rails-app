@@ -63,7 +63,7 @@
                                     <tr>
                                         <td><%= review.title %></td>
                                         <td><%= review.user.email %></td>
-                                        <td> <%= review.reviewee_id %></td>
+                                        <td> <%= review.reviewee.email %></td>
                                         <td><%= link_to 'Edit', edit_post_review_path(@post,review), class: 'btn btn-primary' %></td>
                                         <td><%= link_to 'Delete', post_review_path(@post,review), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
                                     </tr>

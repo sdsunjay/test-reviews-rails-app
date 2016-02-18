@@ -1,9 +1,12 @@
 class Review < ActiveRecord::Base
 
+	# user owner the review
 	belongs_to :user
-	belongs_to :post
 	# post will have many reviews
-
+	belongs_to :post
+	# reviewee_id references User's table
+  	belongs_to :reviewee, class_name: 'User'
+	
 	validates :reviewee_id, presence: true
 	validates :user_id, presence: true
 	validates :post_id, presence: true
