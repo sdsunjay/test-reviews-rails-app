@@ -15,10 +15,10 @@ class Post < ActiveRecord::Base
 	enum status: {
 	    # The ride has not left yet
 	    open: 0,
-	    # More than 0 riders and the ride is over
-	    complete: 1,
 	    # More than 0 riders and the ride is NOT over
-	    pending: 2,
+	    pending: 1,
+	    # More than 0 riders and the ride is over
+	    complete: 2,
 	    # No riders and the ride is over
 	    incomplete: 3
 	}
@@ -27,9 +27,11 @@ class Post < ActiveRecord::Base
 		if self.when < DateTime.now && buyers.any?
 			# More than 0 riders and the ride is over
 			self.status = 'complete'
+			self.save
 		elsif self.when < DateTime.now 
 			# No riders and the ride is over
 			self.status = 'incomplete'
+			self.save
 		end
         end
 
