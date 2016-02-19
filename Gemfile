@@ -28,6 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 3.5.5'
 # You know, for image uploads
 gem 'paperclip', '~> 4.3.5'
+#activejob
+# You know, for Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 # You know, for search
 gem 'searchkick', '~> 1.0'
