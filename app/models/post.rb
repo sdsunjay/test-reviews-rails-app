@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
 		# The ride has not left yet
 		open: 0,
 		# More than 0 riders and the ride is over
-		completed: 1,
+		complete: 1,
 		# More than 0 riders and the ride is NOT over
 		pending: 2,
 		# No riders and the ride is over
@@ -29,16 +29,12 @@ class Post < ActiveRecord::Base
 	end
 
 	def check_start_date
-		if self.when >= DateTime.now
-			# the ride is not over
-			self.status = 'Open'
-		elsif buyers.any?
+		if self.when < DateTime.now && buyers.any?
 			# More than 0 riders and the ride is over
-			self.status = 'Closed'
-		else
+			self.status = 'complete'
+		elsif self.when < DateTime.now 
 			# No riders and the ride is over
-			self.status = 'Incomplete'
-
+			self.status = 'incomplete'
 		end
         end
 

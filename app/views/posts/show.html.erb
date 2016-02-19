@@ -34,7 +34,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <% if @post.status == 'completed' %>
+                    <% if @post.status == 'complete' %>
                         <%= link_to "Write a Review", new_post_review_path(@post) %><br>
                     <% end %>
                     <% if @post.status == 'open' %>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-7 col-md-offset-1">
                 <h1 class="review_title">Reviews</h1>
-                <% if @post.status == 'completed' %>
+                <% if @post.status == 'complete' %>
                     <% if @reviews.blank? %>
                     <h3>No reviews just yet, would you like to add the first!</h3>
                     <%= link_to "Write Review", new_post_review_path(@post), class: "btn btn-danger" %>

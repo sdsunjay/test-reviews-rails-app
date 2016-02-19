@@ -25,7 +25,7 @@
 <!-- It should change automatically using Rails Active Job -->
 <div class="field">
     <label><%= f.label :status %></label>
-    <%= f.select :status, options_for_select([['open', 'open'], ['completed', 'completed'], ['pending', 'pending'], ['incomplete', 'incomplete']]) %>
+    <%= f.select :status, options_for_select([['open', 'open'], ['complete', 'complete'], ['pending', 'pending'], ['incomplete', 'incomplete']]) %>
 </div>
 <div class="actions">
     <%= f.submit %>

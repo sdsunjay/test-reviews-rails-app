@@ -57,21 +57,26 @@ class PostsController < ApplicationController
 
   def connect
     @buyer = Buyer.new
-    if Review.reviewer_is_driver?(current_user.id, @post.user_id) == false
-      @buyer.user_id = current_user.id
-      @buyer.post_id = @post.id
-      if @buyer.save
-        @post.increment(:number_of_buyers, by = 1)
-        if @post.save
-          flash[:notice] = "Connection Created"
-        else
-          flash[:alert] = "Connection Not Created"
-        end
-      else
-        flash[:alert] = "Connection Not Created"
-      end
+    if @post.status == 'open'
+    	if Review.reviewer_is_driver?(current_user.id, @post.user_id) == false
+      	    @buyer.user_id = current_user.id
+            @buyer.post_id = @post.id
+            if @buyer.save
+                @post.increment(:number_of_buyers, by = 1)
+         	@post.status = 'pending'
+	        if @post.save
+          	    flash[:notice] = "Connection Created"
+                else
+          	    flash[:alert] = "Connection Not Created"
+                end
+            else
+                flash[:alert] = "Connection Not Created"
+            end
+         else
+            flash[:alert] = "Connection Not Created"
+         end
     else
-      flash[:alert] = "Connection Not Created"
+        flash[:alert] = "Connection Not Created"
     end
     redirect_to posts_path
   end
