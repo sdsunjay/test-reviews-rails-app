@@ -57,7 +57,7 @@ class PostsController < ApplicationController
 
   def connect
     @buyer = Buyer.new
-    if @post.status == 'open'
+    if @post.status == 'open' || @post.status == 'pending'
     	if Review.reviewer_is_driver?(current_user.id, @post.user_id) == false
       	    @buyer.user_id = current_user.id
             @buyer.post_id = @post.id
@@ -65,7 +65,8 @@ class PostsController < ApplicationController
                 @post.increment(:number_of_buyers, by = 1)
          	@post.status = 'pending'
 	        if @post.save
-          	    flash[:notice] = "Connection Created"
+          	    PostStatusModifierJob.perform_later
+	            flash[:notice] = "Connection Created"
                 else
           	    flash[:alert] = "Connection Not Created"
                 end

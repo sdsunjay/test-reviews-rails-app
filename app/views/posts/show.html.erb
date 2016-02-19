@@ -37,7 +37,7 @@
                     <% if @post.status == 'complete' %>
                         <%= link_to "Write a Review", new_post_review_path(@post) %><br>
                     <% end %>
-                    <% if @post.status == 'open' %>
+                    <% if @post.status == 'open' || @post.status == 'pending' %>
                         <%= link_to "Express interest", post_connect_path(@post) %>
                     <% end %>
                 </div>
