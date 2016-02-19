@@ -13,20 +13,15 @@ class Post < ActiveRecord::Base
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 	enum status: {
-		# The ride has not left yet
-		open: 0,
-		# More than 0 riders and the ride is over
-		complete: 1,
-		# More than 0 riders and the ride is NOT over
-		pending: 2,
-		# No riders and the ride is over
-		incomplete: 3
+	    # The ride has not left yet
+	    open: 0,
+	    # More than 0 riders and the ride is over
+	    complete: 1,
+	    # More than 0 riders and the ride is NOT over
+	    pending: 2,
+	    # No riders and the ride is over
+	    incomplete: 3
 	}
-
-
-	def has_buyers?
-		buyers.any?
-	end
 
 	def check_start_date
 		if self.when < DateTime.now && buyers.any?
@@ -38,7 +33,7 @@ class Post < ActiveRecord::Base
 		end
         end
 
-		# has_many(:buyers, :foreign_key => :buyer_a_id, :dependent => :destroy)
-		# has_many(:reverse_buyers, :class_name => :Buyer, :foreign_key => :buyer_b_id, :dependent => :destroy)
-		# has_many :users, :through => :buyers :source => :buyer_b
+	# has_many(:buyers, :foreign_key => :buyer_a_id, :dependent => :destroy)
+	# has_many(:reverse_buyers, :class_name => :Buyer, :foreign_key => :buyer_b_id, :dependent => :destroy)
+	# has_many :users, :through => :buyers :source => :buyer_b
 	end
