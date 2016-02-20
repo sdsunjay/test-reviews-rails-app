@@ -6,7 +6,11 @@ class PostsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    if params[:query].present?
+    	@posts = Post.search(params[:query])
+    else
+	@posts = Post.all.order('created_at DESC')
+     end
   end
   
   def show

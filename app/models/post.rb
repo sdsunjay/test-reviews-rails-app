@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
-        delegate :email, to: :user, prefix: true
+	# You know, for search
+	searchkick
+        
+	delegate :email, to: :user, prefix: true
 	belongs_to :user
 	validates :user_id, presence: true
 	validates :title, presence: true
@@ -8,6 +11,7 @@ class Post < ActiveRecord::Base
 
 	has_many :buyers
 	has_many :users, through: :buyers
+
 
 	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
